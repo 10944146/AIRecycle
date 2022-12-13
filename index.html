@@ -31,16 +31,9 @@
         maxPredictions = model.getTotalClasses();
 
         const flip = true; 
-        webcam = new tmImage.Webcam(1500, 700, flip); 
+        webcam = new tmImage.Webcam(1500, 600, flip); 
         //鏡頭方向
         await webcam.setup({ facingMode: "environment" }); 
-
-        document.getElementById('webcam-container').appendChild(webcam.webcam); 
-
-        wc = document.getElementsByTagName('video')[0];
-        wc.setAttribute("playsinline", true); 
-        wc.muted = "true"
-        wc.id = "webcamVideo";
 
         await webcam.play();
         window.requestAnimationFrame(loop); // update canvas by loop-function
@@ -64,19 +57,14 @@
 
     // 預測結果
     async function predict() {
-
-        let prediction;
-        if (isIos) {
-            prediction = await model.predict(webcam.webcam);
-        } else {
-            prediction = await model.predict(webcam.canvas);
-        }
+        // predict can take in an image, video or canvas html element
+        const prediction = await model.predict(webcam.canvas);
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
-                prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
+                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
     }
-</script>
+    </script>
 </body>
 </html>
