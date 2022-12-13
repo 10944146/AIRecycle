@@ -22,6 +22,30 @@
     const URL = "https://teachablemachine.withgoogle.com/models/0JbPikCro/";
     let model, webcam, labelContainer, maxPredictions;
 
+
+    // Load the image model and setup the webcam
+    async function init() {
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+
+
+        const flip = true; // whether to flip the webcam
+        webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+        await webcam.setup(); // request access to the webcam
+        await webcam.play();
+        window.requestAnimationFrame(loop);
+
+        // append elements to the DOM
+        document.getElementById("webcam-container").appendChild(webcam.canvas);
+        labelContainer = document.getElementById("label-container");
+        for (let i = 0; i < maxPredictions; i++) { // and class labels
+            labelContainer.appendChild(document.createElement("div"));
+        }
+    }
+
     //載入訓練模型/設置鏡頭
     async function init() {
         const modelURL = URL + 'model.json';
@@ -42,15 +66,16 @@
         wc.muted = "true"
         wc.id = "webcamVideo";
 
-        await webcam.play();
-        window.requestAnimationFrame(loop); // update canvas by loop-function
-
         // append elements to the DOM
         document.getElementById("webcam-container").appendChild(webcam.canvas);
         labelContainer = document.getElementById("label-container");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
         }
+
+        await webcam.play();
+        window.requestAnimationFrame(loop); // update canvas by loop-function
+
     }
 
     async function loop() {
