@@ -42,7 +42,7 @@
         wc.muted = "true"
         wc.id = "webcamVideo";
 
-        webcam.play();
+        await webcam.play();
         window.requestAnimationFrame(loop); // update canvas by loop-function
 
         // append elements to the DOM
