@@ -35,7 +35,7 @@
         webcam = new tmImage.Webcam(1500, 600, flip); 
         //鏡頭方向
         await webcam.setup({ facingMode: "environment" }); 
-        //document.getElementById('webcam-container').appendChild(webcam.webcam); 
+        document.getElementById('webcam-container').appendChild(webcam.webcam); 
         //wc = document.getElementsByTagName('video')[0];
         //wc.setAttribute("playsinline", true); 
         //wc.muted = "true"
