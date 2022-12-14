@@ -39,12 +39,12 @@
         wc = document.getElementsByTagName('video')[0];
         wc.setAttribute("playsinline", true); 
         wc.muted = "true"
-        wc.id = "webcamVideo";
-        webCamVideo.style.width = width + 'px';
-        webCamVideo.style.height = height + 'px';
+        //wc.id = "webcamVideo";
+        //webCamVideo.style.width = width + 'px';
+        //webCamVideo.style.height = height + 'px';
 
         document.getElementById("webcam-container").appendChild(webcam.canvas);
-        
+
         labelContainer = document.getElementById("label-container");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
