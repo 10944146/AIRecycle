@@ -36,10 +36,10 @@
         //鏡頭方向
         await webcam.setup({ facingMode: "environment" }); 
         document.getElementById('webcam-container').appendChild(webcam.webcam); 
-        //wc = document.getElementsByTagName('video')[0];
-        //wc.setAttribute("playsinline", true); 
-        //wc.muted = "true"
-        //wc.id = "webcamVideo";
+        wc = document.getElementsByTagName('video')[0];
+        wc.setAttribute("playsinline", true); 
+        wc.muted = "true"
+        wc.id = "webcamVideo";
         //webCamVideo.style.width = width + 'px';
         //webCamVideo.style.height = height + 'px';
 
